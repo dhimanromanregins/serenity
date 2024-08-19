@@ -10,8 +10,21 @@
     <p>Published Date: {{ book.published_date }}</p>
     <p>ISBN: {{ book.isbn }}</p>
     <p>Summary: {{ book.summary }}</p>
-    <a href="{% url 'book_update' pk=book.pk %}">Edit</a>
-    <a href="{% url 'book_delete' pk=book.pk %}">Delete</a>
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in book.reviews.all %}
+            <li>
+                <strong>{{ review.user.username }}:</strong> {{ review.rating }} stars
+                <p>{{ review.comment }}</p>
+                <p>Reviewed on {{ review.created_at }}</p>
+            </li>
+        {% empty %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <a href="{% url 'submit_review' pk=book.pk %}">Submit a review</a>
+    {% endif %}
     <a href="{% url 'book_list' %}">Back to list</a>
 </body>
 </html>
