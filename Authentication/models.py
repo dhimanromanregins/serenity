@@ -7,7 +7,14 @@ import string
 
 class CustomUser(AbstractUser):
     mobile_number = models.CharField(max_length=15, blank=True, null=True, verbose_name=_("Mobile Number"))
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
+    address = models.TextField()
+    profile_photo = models.ImageField(upload_to='profile_photos/', blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=False)
+    email_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username
