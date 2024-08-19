@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <form method="GET" action="{% url 'book_search' %}">
+        <input type="text" name="q" placeholder="Search books..." />
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for book in books %}
+            <li><a href="{% url 'book_detail' pk=book.pk %}">{{ book.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'book_create' %}">Add new book</a>
+</body>
+</html>
